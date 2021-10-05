@@ -23,11 +23,24 @@ export default {
 
       由于mock文件放在public下，public下的文件在请求时可直接写路径，默认就是这个域名和端口下的pathname
     */
-    this.axios.get('/mock/user/login.json').then((response)=>{
+    // this.axios.get('/mock/user/login.json').then((response)=>{
+    //   this.res = response
+    // })
+
+    /* 
+      通过easy-mock平台实现数据mock
+    */
+    this.axios.get('/user/login').then((response)=>{
       this.res = response
-    }).catch((error)=>{
-      console.log(error);
     })
+
+    /* 
+      本地集成mockjs实现数据mock
+    */
+    // this.axios.get('/user/login').then((response)=>{
+    //   this.res = response
+    // })
+
   },
 }
 </script>

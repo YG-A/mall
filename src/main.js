@@ -5,12 +5,18 @@ import VueAxios from 'vue-axios'
 import App from './App.vue'
 // import env from './env'
 
-// 根据前端的跨域方式做调整
-// axios.defaults.baseURL = '/api'// 因为devServer中配置了host,与port所以写一个/api也能用
-// 根据【环境变量】获取不同的请求地址
-// axios.defaults.baseURL = env.baseURL
-// console.log(axios.defaults.baseURL);
+//mock开关，不用这个时一定要关闭，否则会把任何请求都拦截
+const mock = false
+if(mock){
+  require('./mock/api')
+}
+
+// 以下几种baseURL根据前端的跨域方式做调整即可，并非固定的
+// axios.defaults.baseURL = '/api'// 写一个/api的意思就是在当前域名和接口下的http://localhost:8080/api
+axios.defaults.baseURL = 'https://mock.mengxuegu.com/mock/615c6699912f2644883cb130/api'// easy-mock中配置得到的地址
 axios.defaults.timeout = 8000
+// axios.defaults.baseURL = env.baseURL// 根据【环境变量】获取不同的请求地址
+// console.log(axios.defaults.baseURL);
 
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
