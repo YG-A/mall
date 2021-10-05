@@ -3,13 +3,13 @@ import router from './router/index'// 引入自定义的路由器
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
-import env from './env'
+// import env from './env'
 
 // 根据前端的跨域方式做调整
 // axios.defaults.baseURL = '/api'// 因为devServer中配置了host,与port所以写一个/api也能用
 // 根据【环境变量】获取不同的请求地址
-axios.defaults.baseURL = env.baseURL
-console.log(axios.defaults.baseURL);
+// axios.defaults.baseURL = env.baseURL
+// console.log(axios.defaults.baseURL);
 axios.defaults.timeout = 8000
 
 // 添加响应拦截器

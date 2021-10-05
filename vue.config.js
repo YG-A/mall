@@ -1,7 +1,7 @@
 module.exports = {
   devServer:{
-    host:'localhost',
-    port:8080,
+    host:'localhost',// 设置主机名
+    port:8080,// 设置端口
     proxy:{
       // 如果请求的前缀是api(http://lcoalhost:8080/api),那就走代理服务器，
       '/api':{
