@@ -4,14 +4,20 @@
       因为每个页面都有头部和底部组件,所以直接把头部尾部定义固定出来
       中间用一个router-view来动态改变不同组件(即不同页面)
     -->
-    <nav-header></nav-header>
+    order
+    <order-header></order-header>
     <router-view></router-view>
     <nav-footer></nav-footer>
   </div>
 </template>
 <script>
+import OrderHeader from '../components/OrderHeader.vue'
+import NavFooter from '../components/NavFooter.vue'
 export default {
-  name: ''
+  name: 'order',
+  components: {
+    OrderHeader,NavFooter
+  }
 }
 </script>
 <style lang="">
