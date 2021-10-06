@@ -12,8 +12,8 @@ if(mock){
 }
 
 // 以下几种baseURL根据前端的跨域方式做调整即可，并非固定的
-// axios.defaults.baseURL = '/api'// 写一个/api的意思就是在当前域名和接口下的http://localhost:8080/api
-axios.defaults.baseURL = 'https://mock.mengxuegu.com/mock/615c6699912f2644883cb130/api'// easy-mock中配置得到的地址
+axios.defaults.baseURL = '/api'// 写一个/api的意思就是在当前域名和接口下的http://localhost:8080/api
+// axios.defaults.baseURL = 'https://mock.mengxuegu.com/mock/615c6699912f2644883cb130/api'// easy-mock中配置得到的地址
 axios.defaults.timeout = 8000
 // axios.defaults.baseURL = env.baseURL// 根据【环境变量】获取不同的请求地址
 // console.log(axios.defaults.baseURL);
