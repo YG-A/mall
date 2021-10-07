@@ -191,13 +191,16 @@ export default {
         // justify-content: space-between;
         // align-items: center;
         @include flex();// 使用flex混合
-        .sep{
-          margin: 0.4em;
-          color: #424242;
-        }
         a{
           display: inline-block;
           color: #B0B0B0;
+          &:hover{
+            color: #fff
+          }
+        }
+        .sep{
+          margin: 0.4em;
+          color: #424242;
         }
         .topbar-user{
           .my-cart{
