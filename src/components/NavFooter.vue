@@ -17,7 +17,6 @@
           <span class="sep">|</span> 
           <a rel="nofollow" href="//www.duokan.com/" target="_blank">多看</a> 
           <span class="sep">|</span> 
-          <span class="sep">|</span> 
           <a rel="nofollow" href="//game.xiaomi.com/" target="_blank">学习无止境</a> 
         </p>
         <div class="copyright">Copyright ©2021 <span class="domain">mi.futurefe.com</span> All Rights Reserved</div>
