@@ -1,31 +1,31 @@
 <template>
   <div class="header">
     <div class="nav-topbar">
-       <div class="container">
-         <div class="topbar-menu">
-           <a href="/#/index">小米商城</a>
-           <span class="sep">|</span>
-           <a href="https://home.miui.com/" target="_blank">MIUI</a>
-           <span class="sep">|</span>
-           <a href="https://iot.mi.com/"  target="_blank">loT</a>
-           <span class="sep">|</span>
-           <a href="https://i.mi.com/" target="_blank">云服务</a>
-           <span class="sep">|</span>
-           <a href="https://www.mi.com/aptitude/list" target="_blank">协议规则</a>
-         </div>
-         <div class="topbar-user">
-           <a href="javascript:;" v-if="username">{{username}}</a>
-           <a href="javascript:;" v-else @click="login()">登录</a>
-           <span class="sep">|</span>
-           <a href="javascript:;" target="_blank">我的订单</a>
-           <span class="sep">|</span>
-           <a href="javascript:;" class="my-cart" @click="goToCart()">
-            <span class="icon-cart"></span>
-            购物车
-           </a>
+      <div class="container">
+        <div class="topbar-menu">
+          <a href="/#/index">小米商城</a>
+          <span class="sep">|</span>
+          <a href="https://home.miui.com/" target="_blank">MIUI</a>
+          <span class="sep">|</span>
+          <a href="https://iot.mi.com/"  target="_blank">loT</a>
+          <span class="sep">|</span>
+          <a href="https://i.mi.com/" target="_blank">云服务</a>
+          <span class="sep">|</span>
+          <a href="https://www.mi.com/aptitude/list" target="_blank">协议规则</a>
+        </div>
+        <div class="topbar-user">
+          <a href="javascript:;" v-if="username">{{username}}</a>
+          <a href="javascript:;" v-else @click="login()">登录</a>
+          <span class="sep">|</span>
+          <a href="javascript:;" target="_blank">我的订单</a>
+          <span class="sep">|</span>
+          <a href="javascript:;" class="my-cart" @click="goToCart()">
+          <span class="icon-cart"></span>
+          购物车
+          </a>
 
-         </div>
-       </div>
+        </div>
+      </div>
     </div>
     <div class="nav-header">
       <div class="container">
@@ -33,7 +33,7 @@
           <a href="/#/index" title="小米官网">小米官网</a>
         </div>
         <div class="header-menu">
-          <div class="item-menu">
+          <div class="item-menu" :class="{'isActive':itemMenuIndex === 0}" @mouseenter="slideDown($event,0)" @mouseleave="slideUp($event)">
             <a class="item-menu-a" href="javascript: void(0);">
               <span>小米手机</span>
             </a>
@@ -51,15 +51,70 @@
               </ul>
             </div>
           </div>
-          <div class="item-menu">
+          <div class="item-menu" :class="{'isActive':itemMenuIndex === 1}" @mouseenter="slideDown($event,1)" @mouseleave="slideUp($event)">
             <a class="item-menu-a" href="javascript: void(0);">
               <span>Redmi红米</span>
             </a>
             <div class="children">
-              红米的
+              <ul class="product-list">
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e3c5d99c28700a3c45ea65eebbea0a04.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+                    </div>
+                    <div class="pro-name">Redmi Note 10 Pro</div>
+                    <div class="pro-price">1599元起</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88bb84ff06f0ab467b859aeed36b817a.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+                    </div>
+                    <div class="pro-name">Redmi Note 10 5G</div>
+                    <div class="pro-price">1099元起</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/acd0f27496ccdf81ef42124c35e8bfc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+                    </div>
+                    <div class="pro-name">K40 游戏增强版</div>
+                    <div class="pro-price">1999元起</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d07671f25a2b3a6c3d4fac189f28fbe9.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+                    </div>
+                    <div class="pro-name">K40 Pro 系列</div>
+                    <div class="pro-price">2499元起</div>
+                  </a>
+                </li>      
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ecebd50c7840bb03d7b5e3bfe4d439c2.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+                    </div>
+                    <div class="pro-name">Redmi K40</div>
+                    <div class="pro-price">1999元起</div>
+                  </a>
+                </li>   
+                <li class="product">
+                  <a href="" target="_blank">
+                    <div class="pro-img">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/584add2c9cfdb9eefe7b642bf191773a.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+                    </div>
+                    <div class="pro-name">Redmi Note 9 4G</div>
+                    <div class="pro-price">899元起</div>
+                  </a>
+                </li>                                       
+              </ul>
             </div>
           </div>
-          <div class="item-menu">
+          <div class="item-menu" :class="{'isActive':itemMenuIndex === 2}" @mouseenter="slideDown($event,2)" @mouseleave="slideUp($event)">
             <a class="item-menu-a" href="javascript: void(0);">
               <span>电视</span>
             </a>
@@ -130,6 +185,15 @@
           </div>
         </div>
       </div>
+      <transition enter-class="slide-up" leave-to-class="slide-up"  enter-to-class="slide-down" leave-class="slide-down">
+        <div class="header-menu-children" 
+          ref="headerChildren"
+          v-show="isShow"
+          @mouseleave="slideUp"
+        >
+          <!-- 这里面是header-menu上滑动选中的结构 -->
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -139,7 +203,9 @@ export default {
   data() {
     return {
       username: '',
-      phoneList: []
+      phoneList: [], //后台请求数据获得的,只有小米手机的数据，红米和电视的数据是静态的
+      isShow: false,
+      itemMenuIndex : -1
     }
   },
   methods: {
@@ -164,10 +230,33 @@ export default {
     },
     goToCart(){
       this.$router.push('/cart')
+    },
+    slideUp(e){
+      if(!e.toElement) {// 为null说明，移除窗口了
+        this.isShow = false
+        this.itemMenuIndex = -1
+        return 
+      }
+      let classList = e.toElement.classList
+      if(classList.contains('product-list') || classList.contains('item-menu') || classList.contains('item-menu-a')){
+        // 这说明是鼠标移动到了下滑children列表中或者，移动到了别的item中，那么下滑列表就不需要隐藏
+        return 
+      }else{
+        console.log(e.toElement.classList);
+        this.isShow = false
+        this.itemMenuIndex = -1
+      }
+    },
+    slideDown(e,index){
+      let content = e.target.getElementsByClassName('children')[0].innerHTML
+      let headerChildren = this.$refs.headerChildren
+      headerChildren.innerHTML = content
+      this.isShow = true
+      this.itemMenuIndex = index
     }
   },
   mounted() {
-    this.getPhoneList()
+    this.getPhoneList() //获取手机列表
   },
   filters: {
     currency(val){
@@ -265,33 +354,22 @@ export default {
         .header-menu{
           flex: 1;
           display: flex;
-          padding-left: 172px;
+          padding-left: 162px;
           .item-menu{
+            position: relative;
             color: #333;
             font-size: 16px;
-            margin-right: 20px;
-            // &::after{
-            //   position: absolute;
-            //   display: inline-block;
-            //   display: none;
-            //   content: '';
-            //   width: 600px;
-            //   height: 40px;
-            //   left: 50%;
-            //   bottom: 0px;
-            //   transform: translateX(-50%);
-            //   background: #FF6600;
-            // }
             .item-menu-a{
               display: inline-block;
               color: #333;
               line-height: 24px;
-              padding: 38px 0;
+              padding: 38px 10px 38px 10px;
               span{
                 cursor: pointer;
               }
             }
             .children{
+              display: none;
               height: 0;
               overflow: hidden;
               position: absolute;
@@ -346,13 +424,30 @@ export default {
                 }
               }
             }
-            &:hover{
+            &.isActive{
               .item-menu-a{
                 color:#FF6600;
               }
-              .children{
-                height: 229px;
-                border-top: 1.25px solid #e0e0e0;
+              &::after{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                /* 
+                  超经典【子元素宽度大于父元素时】
+                  居中布局，且父元素宽度不是固定的值
+                  left: 50%;
+                  margin-left: -300px; 
+                  或者 
+                  margin-right: -300px;
+                  right: 50%;
+                */
+                left: 50%;
+                margin-left: -300px;
+                z-index: 11;
+                display: inline-block;
+                width: 600px;
+                height: 40px;
+                // background-color: skyblue;
               }
             }
           }
@@ -391,6 +486,67 @@ export default {
               input{
                 border-right: 1px solid #b0b0b0;
               }
+            }
+          }
+        }
+      }
+      .header-menu-children{// mouseenter时
+        &.slide-down{
+          height: 229px;
+        }
+        &.slide-up{
+          height: 0;
+        }
+        height: 229px;
+        overflow: hidden;
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        background-color: #fff;
+        transition: all 0.3s;
+        box-shadow: 0 3px 4px 0px rgba(0, 0, 0, 0.18);
+        .product-list{
+          display: flex;
+          margin: 0 auto;
+          justify-content: flex-start;
+          align-items: center;
+          height: 100%;
+          width: 1226px;
+          .product{
+            position: relative;
+            width: 204px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 12px;
+            line-height: 20px;
+            &::before{
+              position: absolute;
+              left: 0;
+              display: inline-block;
+              content: '';
+              width: 1px;
+              height: 100px;
+              background-color: #e0e0e0;
+            }
+            &:nth-of-type(1):before{//第一个product不要横线
+              display: none;
+            }
+            .pro-img{
+              margin-bottom: 16px;
+              img{
+                height: 110px;
+                vertical-align: middle;
+              }
+            }
+            .pro-name{
+              color: #333;
+            }
+            .pro-price{
+              color: #FF6600;
             }
           }
         }

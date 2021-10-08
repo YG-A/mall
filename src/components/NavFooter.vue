@@ -7,17 +7,15 @@
       </div>
       <div class="footer-link">
         <p class="sites">
-          <a rel="nofollow" href="//www.mi.com/index.html" target="_blank">小米商城</a>
+          <a rel="nofollow" href="https://www.mi.com/index.html" target="_blank">小米商城</a>
           <span class="sep">|</span> 
-          <a rel="nofollow" href="//www.miui.com/" target="_blank">MIUI</a> 
+          <a rel="nofollow" href="https://www.miui.com/" target="_blank">MIUI</a> 
           <span class="sep">|</span> 
-          <a rel="nofollow" href="//home.mi.com/index.html" target="_blank">米家</a> 
+          <a rel="nofollow" href="https://home.mi.com/index.html" target="_blank">米家</a> 
           <span class="sep">|</span> 
-          <a rel="nofollow" href="http://www.miliao.com/" target="_blank">米聊</a> 
+          <a rel="nofollow" href="https://www.miliao.com/" target="_blank">米聊</a> 
           <span class="sep">|</span> 
-          <a rel="nofollow" href="//www.duokan.com/" target="_blank">多看</a> 
-          <span class="sep">|</span> 
-          <a rel="nofollow" href="//game.xiaomi.com/" target="_blank">学习无止境</a> 
+          <a rel="nofollow" href="https://game.xiaomi.com/" target="_blank">学习无止境</a> 
         </p>
         <div class="copyright">Copyright ©2021 <span class="domain">mi.futurefe.com</span> All Rights Reserved</div>
       </div>
