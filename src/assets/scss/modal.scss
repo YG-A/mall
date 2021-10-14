@@ -1,0 +1,53 @@
+@import './mixin.scss';
+.modal{
+  @include position(fixed);
+  z-index: 999;
+  transition: all 0.5s;
+  .mask{
+    @include position(fixed);
+    background-color: #000;
+    opacity: 0.5;
+  }
+  .modal-dialog{
+    @include position(absolute,50%,50%,660px,auto);
+    background-color: #fff;
+    transform: translate(-50%,-50%);
+    .modal-header{
+      height: 60px;
+      line-height: 60px;
+      background-color: #f5f5f5;
+      padding: 0 25px;
+      box-sizing: border-box;
+      font-size: 16px;
+      .icon-close{
+        position: absolute;
+        top: 23px;
+        right: 25px;
+        transition: transform 0.3s;
+        @include bgImg(14px,14px,'/imgs/icon-close.png');
+        &:hover{
+          transform: scale(1.5);
+        }
+      }
+    }
+    .modal-body{
+      padding: 42px 40px 54px;
+      font-size: 14px;
+    }
+    .modal-footer{
+      height: 82px;
+      line-height: 82px;
+      text-align: center;
+      background-color: #f5f5f5;
+    }
+  }
+
+  /* 这是transition组件需要的过渡样式 */
+  &.modal-enter,&.modal-leave-to{
+    top: -100%;
+  }
+  &.modal-leave,&.modal-enter-to{
+    top: 0;
+  }
+  
+}
