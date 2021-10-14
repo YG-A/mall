@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="register">
     <div class="container">
       <a href="/#/index"><img src="/imgs/login-logo.png" alt=""></a>
     </div>
@@ -7,7 +7,7 @@
       <div class="container">
         <div class="login-form">
           <h3>
-            <span class="checked">帐号登录</span><span class="sep-line">|</span><span>扫码登录</span>
+            <span class="checked">帐号注册</span><span class="sep-line">|</span><span>扫码登录</span>
           </h3>
           <div class="input">
             <input type="text" placeholder="请输入帐号" v-model="username">
@@ -15,12 +15,15 @@
           <div class="input">
             <input type="password" placeholder="请输入密码" v-model="password">
           </div>
+          <div class="input">
+            <input type="text" placeholder="请输入邮箱" v-model="email">
+          </div>
           <div class="btn-box">
-            <a href="javascript:;" class="btn" @click="login">登录</a>
+            <a href="javascript:;" class="btn" @click="register">注册</a>
           </div>
           <div class="tips">
             <div class="sms">手机短信登录(未实现)</div>
-            <div class="reg" @click="goToRegister()">立即注册<span>|</span>忘记密码？</div>
+            <div class="reg" @click="goToLogin()">已注册去登录<span>|</span>忘记密码？</div>
           </div>
         </div>
       </div>
@@ -38,37 +41,40 @@
 </template>
 <script>
 export default {
-  name: 'login',
+  name: 'register',
   data() {
     return {
       username: '',
       password: '',
+      email:'',
       userId: '',
     }
   },
   methods: {
-    login(){
-      let {username,password} = this
-      this.axios.post('/user/login',{
-        username,
-        password
-      }).then((res)=>{
-        // 登录后需要存userId到cookie中，本项目后台会获取cookie是否有userId从而判断，用户是否登录了
-        this.$cookie.set('userId',res.id,{expires: '1M'})// 把登录成功返回的id保存到cookie中,有效时间为1个月
-        this.$store.dispatch('saveUserName',res.username)
-        this.$router.push('/index')// 登录成功后跳转到index
-      }).catch((error)=>{
-        console.log('登录失败',error);
-      })
+    goToLogin(){
+      this.$router.push('/login')
     },
-    goToRegister(){
-      this.$router.push('/register')
+    register(){
+      let {username,password,email} = this
+      this.axios.post('/user/register',{
+        username,
+        password,
+        email
+      }).then((res)=>{
+        // console.log(res)// {status: 0, msg: "注册成功"}
+        if(res.status === 0){
+          alert(res.msg)
+          this.$router.push('/login')// 登录成功后跳转到index
+        }
+      }).catch((error)=>{
+        console.log('注册失败',error);
+      })
     }
   },
 }
 </script>
-<style lang="scss" scoped>
-.login{
+<style lang="scss">
+.register{
   &>.container{
     height:113px;
     img{

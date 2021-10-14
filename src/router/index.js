@@ -16,6 +16,8 @@ import OrderConfirm from '../pages/orderConfirm.vue'
 import OrderList from '../pages/orderList.vue'
 import OrderPay from '../pages/orderPay.vue'
 import Alipay from '../pages/alipay.vue'
+import Login from '../pages/login.vue'
+import Register from '../pages/register.vue'
 
 Vue.use(VueRouter)
 
@@ -75,6 +77,16 @@ export default new VueRouter({
           component: Alipay
         }
       ]
-    }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+    },
   ]
 })

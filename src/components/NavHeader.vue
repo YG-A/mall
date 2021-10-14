@@ -17,13 +17,12 @@
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-else @click="login()">登录</a>
           <span class="sep">|</span>
-          <a href="javascript:;" target="_blank">我的订单</a>
+          <a href="javascript:;">我的订单</a>
           <span class="sep">|</span>
           <a href="javascript:;" class="my-cart" @click="goToCart()">
-          <span class="icon-cart"></span>
-          购物车
+            <span class="icon-cart"></span>
+            购物车({{cartCount}})
           </a>
-
         </div>
       </div>
     </div>
@@ -198,15 +197,24 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'nav-header',
   data() {
     return {
-      username: '',
       phoneList: [], //后台请求数据获得的,只有小米手机的数据，红米和电视的数据是静态的
       isShow: false,
       itemMenuIndex : -1
     }
+  },
+  computed:{
+    // username(){
+    //   return this.$store.state.username
+    // },
+    // cartCount(){
+    //   return this.$store.state.cartCount
+    // }
+    ...mapState(['username','cartCount'])
   },
   methods: {
     login(){
@@ -242,7 +250,6 @@ export default {
         // 这说明是鼠标移动到了下滑children列表中或者，移动到了别的item中，那么下滑列表就不需要隐藏
         return 
       }else{
-        console.log(e.toElement.classList);
         this.isShow = false
         this.itemMenuIndex = -1
       }
@@ -505,6 +512,7 @@ export default {
         width: 100%;
         z-index: 10;
         background-color: #fff;
+        border-top: 1px solid rgb(224, 224, 224);
         transition: all 0.3s;
         box-shadow: 0 3px 4px 0px rgba(0, 0, 0, 0.18);
         .product-list{
