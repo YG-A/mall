@@ -45,6 +45,26 @@
     p1.then(function(res){
       console.log(this,res);
     })
+
+    /* 
+      经过测试发现
+      cookie如果不设置过期时间，那么当关闭浏览器时(不是关闭当前窗口)，就是cookie销毁的时候
+      并且开启同一个浏览器的其他窗口，访问本页面时，cookie也是存在的可用的
+      
+      sessionStorage不能设置过期时间，且只能在当前窗口下使用，即使同一浏览器其他窗口打开也是无效的
+      当窗口关闭时，sessionStorage销毁
+
+      localStorage永久有效，只要不主动clear，可在同一浏览器的多窗口访问
+    */
+
+    
+    // document.cookie = "age = 33"
+    let p = {
+      age: 15,
+      name: 'yg'
+    }
+    // window.localStorage.setItem('person',JSON.stringify(p))
+    // window.sessionStorage.setItem('person',JSON.stringify(p))
   </script>
 </body>
 </html>

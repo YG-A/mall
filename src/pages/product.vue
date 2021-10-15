@@ -3,7 +3,7 @@
     <!-- 正常结构中参数栏 -->
     <product-params :productName="productInfo.name">
       <template #buy>
-        <a class="btn params-last">立即购买</a>
+        <a :href="`/#/detail/${$route.params.id}`" class="btn params-last">立即购买</a>
       </template>
     </product-params>
     <!-- 滚动时绝对定位的参数栏 -->
@@ -51,14 +51,16 @@
         <h2>60帧超慢动作摄影<br/>慢慢回味每一瞬间的精彩</h2>
         <p>后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br/>更能AI 精准分析视频内容，15个场景智能匹配背景音效。</p>
         <div class="video-bg" @click="playVideo"></div>
-        <div class="video-box" >
-          <div class="overlay" v-show="showSlide"></div> <!--遮罩层-->
-          <div class="video" :class="{'slideDown':showSlide}"> 
-            <div class="icon-close" @click="closeVideo"></div>
-            <!-- 设置自动播放的同时设置muted(静音)，才能有效 -->
-            <video ref="video" src="/imgs/product/video.mp4" controls="controls"></video>
+        <transition enter-active-class="slideDown" leave-active-class="slideUp">
+          <div class="video-box" v-show="showSlide">
+            <div class="overlay"></div> <!--遮罩层-->
+            <div class="video"> 
+              <div class="icon-close" @click="closeVideo"></div>
+              <!-- 设置自动播放的同时设置muted(静音)，才能有效 -->
+              <video ref="video" src="/imgs/product/video.mp4" controls="controls"></video>
+            </div>
           </div>
-        </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -227,7 +229,28 @@ export default {
           cursor:pointer;
         }
         .video-box{
-          // display: none;
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 10;
+          width: 100%;
+          height: 100%;
+          @keyframes slide {
+            from{
+              top: -100%;
+              opacity: 0;
+            }
+            to{
+              top:0;
+              opacity: 1;
+            }
+          }
+          &.slideDown{
+            animation: slide 0.2s linear 0s 1 ;
+          }
+          &.slideUp{
+            animation: slide 0.2s linear 0s 1 reverse ;
+          }
           .overlay{
             position: fixed;
             left: 0;
@@ -238,29 +261,13 @@ export default {
             background-color: rgba(0,0,0,0.5);
           }
           .video{
-            position: fixed;
+            position: absolute;
             width: 1000px;
             height: 536px;
             left: 50%;
-            top: -50%;
+            top: 50%;
             transform: translate(-50%,-50%);
             z-index: 11;
-            @keyframes slideDown {
-              from{
-                opacity: 0;
-                top: -50%;
-              }
-              to{
-                opacity: 1;
-                top: 50%;
-              }
-            }
-            &.slideDown{
-              animation: slideDown 0.3s linear 0s 1 forwards;
-            }
-            &.slideUp{
-              animation: slideDown 0.3s linear 0s 1 reverse forwards;
-            }
             .icon-close{
               position: absolute;
               cursor: pointer;
