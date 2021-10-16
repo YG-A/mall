@@ -800,14 +800,12 @@ export default {
       })
     },
     addCart(id){// 通过单击分类中的价格栏快捷添加到购物车
-      // console.log(id);
-      // this.showModal = true
       this.axios.post('/carts',{
         productId: id,
         selected: true 
       }).then((res)=>{
         this.showModal = true
-        console.log(res);
+        this.$store.dispatch('saveCartCount',res.cartTotalQuantity)
       }).catch((error)=>{
         console.log(error);
       })

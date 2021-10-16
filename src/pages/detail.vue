@@ -231,7 +231,7 @@ export default {
         productId,
         selected: true
       }).then((res)=>{
-        this.$store.dispatch('saveCartCount',res.cartProductVoList.length)
+        this.$store.dispatch('saveCartCount',res.cartTotalQuantity)
         this.$router.push('/cart')
       }).catch((error)=>{
         console.log(error);
