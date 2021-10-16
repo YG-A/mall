@@ -23,16 +23,16 @@ export default {
         // 保存username到vuex中
         this.$store.dispatch('saveUserName',res.username)
       }).catch((error)=>{
-        console.log(error);
+        console.log('用户信息获取不了，需要登录'+error);
       })
     },
-    getCartCount(){
+    getCartCount(){// 获取购物车信息
       this.axios.get('/carts/products/sum').then((res)=>{
         // 保存到购物车中商品数量到vuex中
         console.log(res);
         this.$store.dispatch('saveCartCount',res)
       }).catch((error)=>{
-        console.log(error);
+        console.log('购物车商品数量获取不到，需要登录'+error);
       })
     }
   },
