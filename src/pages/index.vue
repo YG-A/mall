@@ -35,6 +35,7 @@
             </swiper-slide>
             <!-- 分页器 -->
             <div class="swiper-pagination" slot="pagination"></div>
+            <!-- 上一页，下一页的按钮 -->
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
           </swiper>
@@ -99,7 +100,7 @@
       sureText="查看购物车"
       :showModal="showModal"
       @submit="goToCart"
-      @cancel="showModal=false"
+      @cancel="showModal = false"
       >
       <template #body>
         <p>商品添加成功！</p>
@@ -799,17 +800,17 @@ export default {
       })
     },
     addCart(id){// 通过单击分类中的价格栏快捷添加到购物车
-      console.log(id);
-      this.showModal = true
-      // this.axios.post('/carts',{
-      //   productId: id,
-      //   selected: true 
-      // }).then((res)=>{
-      //   this.showModal = true
-      //   console.log(res);
-      // }).catch((error)=>{
-      //   console.log(error);
-      // })
+      // console.log(id);
+      // this.showModal = true
+      this.axios.post('/carts',{
+        productId: id,
+        selected: true 
+      }).then((res)=>{
+        this.showModal = true
+        console.log(res);
+      }).catch((error)=>{
+        console.log(error);
+      })
     },
     goToCart(){
       this.$router.push('/cart')

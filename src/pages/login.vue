@@ -57,6 +57,7 @@ export default {
         this.$cookie.set('userId',res.id,{expires: '1M'})// 把登录成功返回的id保存到cookie中,有效时间为1个月
         this.$store.dispatch('saveUserName',res.username)
         this.$router.push('/index')// 登录成功后跳转到index
+        // location.reload()
       }).catch((error)=>{
         console.log('登录失败',error);
       })

@@ -10,7 +10,7 @@
     <transition name="params-fixed" >
       <product-params v-show="paramsShow" :posFix="true" :productName="productInfo.name">
         <template #buy>
-          <a class="btn params-last">立即购买</a>
+          <a :href="`/#/detail/${$route.params.id}`" class="btn params-last">立即购买</a>
         </template>
       </product-params>
     </transition>
@@ -42,7 +42,7 @@
           <swiper-slide><img src="/imgs/product/gallery-4.png" alt=""></swiper-slide>
           <swiper-slide><img src="/imgs/product/gallery-5.jpg" alt=""></swiper-slide>
           <swiper-slide><img src="/imgs/product/gallery-6.jpg" alt=""></swiper-slide>
-          <!-- Optional controls -->
+          <!-- 分页器 -->
           <div class="swiper-pagination"  slot="pagination"></div>
         </swiper>
         <p class="desc">小米8 AI变焦双摄拍摄</p>

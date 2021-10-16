@@ -21,7 +21,7 @@ axios.defaults.baseURL = '/api'// 写一个/api的意思就是在当前域名和
 // axios.defaults.baseURL = env.baseURL// 根据【环境变量】获取不同的请求地址
 axios.defaults.timeout = 8000// 设置延迟等待的时间
 
-// 添加响应拦截器
+// 添加响应拦截器start
 axios.interceptors.response.use(function (response) {
   let res = response.data
   if(res.status === 0){// 1.根据文档，服务器响应的数据中status属性为0表示成功
@@ -33,19 +33,21 @@ axios.interceptors.response.use(function (response) {
     }
   }else if(res.status === 10){
     // status为10表示未登录
-    // if(location.hash !== '#/index'){
+    if(location.hash !== '#/index'){
       // 如果用户不在首页，还请求了一些需要登录后才能进行的操作，则自动跳转到登录页
-      // window.location.href = '/#/login'// 可以不写全路径，只写pathname
-    // }
-    // alert(res.msg)
+      window.location.href = '/#/login'// 可以不写全路径，只写pathname
+    }
     return Promise.reject(res.msg);
   }else{
+    // 未登录、已注册、用户名不存在、密码错误等等
     alert(res.msg)
     return Promise.reject(res.msg);
   }
 }, function (error) {
   return Promise.reject(error);
 });
+// 添加响应拦截器end
+
 
 Vue.use(VueAxios,axios)// 将axios弄到vue中，这样就可以直接vm或vc.axios.xxx
 Vue.use(VueCookie)// vuecookie插件，便于操作cookie

@@ -21,7 +21,7 @@
           <span class="sep">|</span>
           <a href="javascript:;" class="my-cart" @click="goToCart()">
             <span class="icon-cart"></span>
-            购物车({{cartCount}})
+              购物车({{cartCount}})
           </a>
         </div>
       </div>
