@@ -29,16 +29,18 @@ export default {
     getCartCount(){// 获取购物车信息
       this.axios.get('/carts/products/sum').then((res)=>{
         // 保存到购物车中商品数量到vuex中
-        console.log(res);
         this.$store.dispatch('saveCartCount',res)
       }).catch((error)=>{
-        console.log('购物车商品数量获取不到，需要登录'+error);
+        console.log('购物车数量获取不到，需要登录'+error);
       })
     }
   },
   mounted() {
-    this.getUser()
-    this.getCartCount()
+    // cookie中存在userId说明登录状态，那就去请求用户信息等等，否则别搞
+    if(this.$cookie.get('userId')){
+      this.getUser()
+      this.getCartCount()
+    }
   }
 }
 </script>

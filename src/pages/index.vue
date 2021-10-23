@@ -807,6 +807,9 @@ export default {
         this.showModal = true
         this.$store.dispatch('saveCartCount',res.cartTotalQuantity)
       }).catch((error)=>{
+        if(error === 'NEED_LOGIN'){
+          this.$message.warning('请先登录')
+        }
         console.log(error);
       })
     },

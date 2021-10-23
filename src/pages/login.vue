@@ -54,11 +54,18 @@ export default {
         password
       }).then((res)=>{
         // 登录后需要存userId到cookie中，本项目后台会获取cookie是否有userId从而判断，用户是否登录了
-        this.$cookie.set('userId',res.id,{expires: '1M'})// 把登录成功返回的id保存到cookie中,有效时间为1个月
+        // this.$cookie.set('userId',res.id,{expires: '1M'})// 把登录成功返回的id保存到cookie中,有效时间为1个月
+        this.$cookie.set('userId',res.id,{expires:'Session'})// 设置过期时间为Session，过期时间为一次会话(关闭这个浏览器不是关闭当前页窗口)
         this.$store.dispatch('saveUserName',res.username)
-        this.$router.push('/index')// 登录成功后跳转到index
-        location.reload()// 登录后刷新一下，以此触发app组件上的mounted钩子从而获取用户数据
+        // 使用params传一个参数来标识，是从login跳转的，需要再请求一次用户信息
+        this.$router.push({
+          name: 'index',// params传参只能用name
+          params: {
+            from:'login'
+          }
+        })
       }).catch((error)=>{
+        this.$message.error('登录失败')
         console.log('登录失败',error);
       })
     },

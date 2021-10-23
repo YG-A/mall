@@ -6,6 +6,7 @@ import VueRouter from "vue-router"
   2.根据页面去【划分路由】
   3.再从页面中去找相似之处，找共性，然后拆分、提取成子组件
 */
+
 import Home from '../pages/home.vue'
 import Index from '../pages/index.vue'
 import Product from '../pages/product.vue'

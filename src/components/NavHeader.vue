@@ -16,6 +16,10 @@
         <div class="topbar-user">
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-else @click="login()">登录</a>
+          <span v-if="username">
+            <span class="sep">|</span>  
+            <a href="javascript:;" @click="logout()">退出</a>
+          </span>
           <span class="sep">|</span>
           <a href="javascript:;">我的订单</a>
           <span class="sep">|</span>
@@ -208,17 +212,22 @@ export default {
     }
   },
   computed:{
-    // username(){
-    //   return this.$store.state.username
-    // },
-    // cartCount(){
-    //   return this.$store.state.cartCount
-    // }
     ...mapState(['username','cartCount'])
   },
   methods: {
     login(){
       this.$router.push('/login')
+    },
+    logout(){
+      this.axios.post('/user/logout').then(()=>{
+        this.$message.success('注销成功')
+        this.$cookie.set('userId','',{expires:'-1'})// 删除cookie
+        this.$store.dispatch('saveUserName','')// 清除用户名
+        this.$store.dispatch('saveCartCount',0)// 清除购物车数量
+
+      }).catch((error)=>{
+        console.log(error);
+      })
     },
     getPhoneList(){
       this.axios.get('/products',{
@@ -260,10 +269,23 @@ export default {
       headerChildren.innerHTML = content
       this.isShow = true
       this.itemMenuIndex = index
+    },
+    getCartCount(){// 获取购物车信息
+      this.axios.get('/carts/products/sum').then((res)=>{
+        // 保存到购物车中商品数量到vuex中
+        this.$store.dispatch('saveCartCount',res)
+      }).catch((error)=>{
+        console.log('购物车数量获取不到，需要登录'+error);
+      })
     }
   },
   mounted() {
     this.getPhoneList() //获取手机列表
+    let params = this.$route.params
+    // 路由跳转来自与/login，则去获取购物车数量
+    if(params && params.from === 'login'){
+      this.getCartCount()
+    }
   },
   filters: {
     currency(val){
@@ -303,6 +325,9 @@ export default {
             width: 110px;
             background-color: #666;
             text-align: center;
+            &:hover{
+              background-color: #FF6700;
+            }
             .icon-cart{
               // display: inline-block;
               // width: 16px;

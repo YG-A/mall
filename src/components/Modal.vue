@@ -1,15 +1,17 @@
 <template>
   <transition name="modal">
+    <!-- fixed的最外层 -->
     <div class="modal" v-show="showModal">
+      <!-- fixed的阴影遮罩层 -->
       <div class="mask">
-        <!-- 遮罩层 -->
       </div>
+      <!-- absolute的居中弹框 -->
       <div class="modal-dialog">
-        <!-- 弹框 -->
         <div class="modal-header">
           <p>{{title}}</p>
           <a href="javascript:;" class="icon-close" @click="$emit('cancel')"></a>
         </div>
+        <!-- 其内容根据插槽传入 -->
         <div class="modal-body">
           <slot name="body"></slot>
         </div>
@@ -24,6 +26,7 @@
         </div>
       </div>
     </div>
+
   </transition>
 </template>
 <script>
@@ -63,5 +66,4 @@ export default {
   @import '../assets/scss/mixin.scss'; 
   @import '../assets/scss/button.scss'; /* 按钮 的通用样式 */
   @import '../assets/scss/modal.scss'; /* 模态框 的通用样式 */
-
 </style>

@@ -44,12 +44,11 @@
 
   /* 这是transition组件需要的过渡样式 */
   &.modal-enter,&.modal-leave-to{
-    top: -100%;
+    top: -20%;
     opacity: 0;
   }
   &.modal-leave,&.modal-enter-to{
     top: 0;
     opacity: 1;
   }
-  
 }

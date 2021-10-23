@@ -63,10 +63,11 @@ export default {
       }).then((res)=>{
         // console.log(res)// {status: 0, msg: "注册成功"}
         if(res.status === 0){
-          alert(res.msg)
+          this.$message.success('注册成功')// element-ui插件，提示信息
           this.$router.push('/login')// 登录成功后跳转到index
         }
       }).catch((error)=>{
+        this.$message.error('注册失败')
         console.log('注册失败',error);
       })
     }
