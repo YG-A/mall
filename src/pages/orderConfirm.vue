@@ -30,7 +30,7 @@
               <!-- 循环渲染 地址信息 -->
               <div class="addr-info" :class="{'checked':index === checkIndex}" @click="checkIndex = index" v-for="(item,index) in list" :key="index">
                 <h2>{{item.receiverName}}</h2>
-                <div class="phone">{{item.receiverPhone}}</div>
+                <div class="phone">{{item.receiverPhone || item.receiverMobile}}</div>
                 <div class="street">{{`${item.receiverProvince} ${item.receiverCity} ${item.receiverDistrict} ${item.receiverAddress}`}}</div>
                 <div class="action">
                   <a href="javascript:;" class="fl" @click="delAddress(item)">
@@ -124,7 +124,7 @@
         <div class="edit-wrap">
           <div class="item">
             <input type="text" class="input" placeholder="姓名" v-model="checkedAddress.receiverName">
-            <input type="text" class="input" placeholder="手机号" v-model="checkedAddress.receiverPhone">
+            <input type="text" class="input" placeholder="手机号" v-model="checkedAddress.receiverMobile">
           </div>
           <div class="item">
             <!-- 省或直辖市 -->
@@ -219,11 +219,12 @@ export default {
   },
   watch:{
     // 省级索引改变，则清除市和区的值
-    provinceIndex(){
+    provinceIndex(newVal){
       if(this.modifyIndex === 1) {
         this.modifyIndex = 0
         return
       }
+      if(newVal === -1)return 
       let city = this.cityInfo[0]// 默认第一个城市
       this.userAddress.city = city.name
       this.userAddress.district = city.children[0].name
@@ -275,8 +276,7 @@ export default {
       this.axios.post('/orders',{
         shippingId: item.id
       }).then((res)=>{
-        // console.log(res);
-        this.$router.push({
+        this.$router.replace({
           path: '/order/pay',
           query: {
             orderNo: res.orderNo
@@ -314,7 +314,7 @@ export default {
         let msg = ''
         if(!params.receiverName){
           msg = '请输入收货人姓名'
-        }else if(!/\d{11}/.test(params.receiverPhone)){
+        }else if(!/\d{11}/.test(params.receiverMobile)){
           msg = '请输入正确格式的电话号码'
         }else if(!params.receiverProvince){
           msg = '请选择你的省份或直辖市'

@@ -27,6 +27,22 @@ export default {
   components: {
     OrderHeader,NavFooter
   },
+  watch:{
+    $route(to){
+      let path = to.path// to就是新(前往的路由)的$route对象
+      // console.log(path)
+      if(path === '/order/confirm'){
+        this.title = '订单确认'
+        this.tip = '请认真填写收货地址'
+      }else if(path === '/order/list'){
+        this.title = '订单列表'
+        this.tip = '谨防钓鱼链接或诈骗电话'
+      }else if(path === '/order/pay'){
+        this.title = '订单支付'
+        this.tip = '谨防钓鱼链接或诈骗电话'
+      }
+    }
+  },
   mounted() {
     let path = this.$route.path
     if(path === '/order/confirm'){
@@ -37,6 +53,9 @@ export default {
       this.tip = '谨防钓鱼链接或诈骗电话'
     }else if(path === '/order/pay'){
       this.title = '订单支付'
+      this.tip = '谨防钓鱼链接或诈骗电话'
+    }else{
+      this.title = 'aliPay'
       this.tip = '谨防钓鱼链接或诈骗电话'
     }
   },

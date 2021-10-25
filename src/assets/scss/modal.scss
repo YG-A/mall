@@ -1,9 +1,11 @@
 @import './mixin.scss';
 .modal{
+  // 混合中宽高默认为100% ，top:0、left:0
   @include position(fixed);
   z-index: 999;
   transition: all 0.2s;
   .mask{
+    // 混合中宽高默认为100% ，top:0、left:0
     @include position(fixed);
     background-color: #000;
     opacity: 0.5;
