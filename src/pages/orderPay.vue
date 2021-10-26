@@ -7,7 +7,7 @@
             <div class="icon-succ"></div>
             <div class="order-info">
               <h2>订单提交成功！去付款咯～</h2>
-              <p>请在<span>30分</span>内完成支付, 超时后将取消订单</p>
+              <p>请在<span>30分钟</span>内完成支付, 超时后将取消订单</p>
               <p>收货信息：{{addressInfo}}</p>
             </div>
             <div class="order-total"> 
@@ -50,7 +50,11 @@
         </div>
       </div>
     </div>
+
+    <!-- 微信二维码模态框 -->
     <scan-pay-code :img='payImg' v-if="showPay" @close='closePayModal'></scan-pay-code>
+
+    <!-- 模态框 -->
     <modal
       title="支付确认"
       btnType="3"

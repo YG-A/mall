@@ -21,7 +21,7 @@
             <a href="javascript:;" @click="logout()">退出</a>
           </span>
           <span class="sep">|</span>
-          <a href="javascript:;">我的订单</a>
+          <a href="/#/order">我的订单</a>
           <span class="sep">|</span>
           <a href="javascript:;" class="my-cart" @click="goToCart()">
             <span class="icon-cart"></span>
@@ -212,7 +212,7 @@ export default {
     }
   },
   computed:{
-    ...mapState(['username','cartCount'])
+    ...mapState(['username','cartCount']) 
   },
   methods: {
     login(){
@@ -285,6 +285,7 @@ export default {
     // 路由跳转来自与/login，则去获取购物车数量
     if(params && params.from === 'login'){
       this.getCartCount()
+      this.$message.success('欢迎回来')
     }
   },
   filters: {

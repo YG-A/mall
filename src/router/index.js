@@ -28,7 +28,7 @@ export default new VueRouter({
       path: '/',
       name: 'home',
       component: Home,
-      redirect: 'index',// 默认重定向到子路由
+      redirect: 'index',// 重定向到/index下
       children: [
         {
           path: 'index',
@@ -56,6 +56,7 @@ export default new VueRouter({
       path: '/order',
       name: 'order',
       component: Order,
+      redirect: '/order/list',// 重定向到/order/list
       children: [
         {
           path: 'list',
