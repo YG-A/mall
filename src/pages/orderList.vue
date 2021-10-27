@@ -42,10 +42,13 @@
             </div>
           </div>
           
+           <!-- 无订单记录时，替代内容的图片 -->
+          <no-data tips="暂无订单记录" v-if="!loading && list.length === 0"></no-data>
+
           <!-- 加载时,loading图 -->
           <loading v-show="loading"></loading>
 
-          <!-- element-ui的分页器 -->
+          <!-- 方案一 element-ui的分页器 -->
           <el-pagination
             v-show="!loading && list.length > 0"
             background
@@ -56,14 +59,21 @@
           >
           </el-pagination>
 
-          <!-- 加载更多按钮 -->
+          <!-- 方案二 加载更多按钮 -->
           <!-- <div class="load-more" v-show="!loading">
             <el-button type="primary" :loading="loading" @click="loadMore">加载更多</el-button>
           </div> -->
 
-
-          <!-- 无订单记录时 -->
-          <no-data tips="暂无订单记录" v-if="!loading && list.length === 0"></no-data>
+          <!-- 方案三 下拉加载更多 -->
+          <!-- <div class="scroll-more"
+            v-infinite-scroll="scrollMore" 
+            infinite-scroll-disabled="busy" 
+            infinite-scroll-distance="400"
+          >
+            <img v-show="moreLoading" src="/imgs/loading-svg/loading-spinning-bubbles.svg" alt="">
+            <p v-show="!hasNextPage">到底啦!</p>
+          </div> -->
+ 
         </div>
       </div>
     </div>
@@ -72,6 +82,7 @@
 <script>
   import Loading from '../components/Loading.vue'
   import NoData from '../components/NoData.vue'
+  import infiniteScroll from 'vue-infinite-scroll'
   import {Pagination} from 'element-ui'
   import {Button} from 'element-ui'
   export default{
@@ -82,13 +93,21 @@
       [Pagination.name]: Pagination,
       [Button.name]: Button
     },
+    directives: {infiniteScroll},
     data(){
       return{
         list: [],
         loading: false,
+
+        /* 这是分页器要用的 */
         pageSize: 3,// 每页显示3条数据
         pageNum: 1,// 默认第一页，根据点击不同页会改变
-        total: 0// 总共的订单数目
+        total: 0,// 总共的订单数目
+
+        /* 这是滚动加载更多要用的 */
+        busy: false,
+        moreLoading: false,
+        hasNextPage: true// 是否还有下一页
       }
     },
     methods:{
@@ -116,13 +135,42 @@
           }
         })
       },
-      // 当前页改变时触发这个回调函数
+      //1.分页器方案 当前页改变时触发这个回调函数
       handleChange(pageNum){
         // 保存当前页
         this.pageNum = pageNum
         this.getOrderList() 
       },
-      // 点击按钮加载更多
+
+      // 2.滚动到底时加载方案
+      scrollMore(){
+        this.pageNum++
+        this.addOrderList()
+      },
+
+      addOrderList(){
+        this.moreLoading = true
+        this.axios.get('/orders',{
+          params:{
+            pageSize: this.pageSize,
+            pageNum: this.pageNum
+          }
+        }).then((res)=>{
+          this.list = this.list.concat(res.list)
+          this.moreLoading = false
+          this.hasNextPage = res.hasNextPage
+          if(res.hasNextPage){
+            this.busy = false
+          }else{
+            this.busy = true
+          }
+        }).catch((error)=>{
+          console.log(error)
+          this.loading = false
+        })
+      },
+
+      // 3.点击按钮加载更多方案
       // loadMore(){
       //   this.pageNum++// 把当前页+1
       //   this.axios.get('/orders',{
@@ -142,7 +190,8 @@
     },
     mounted(){
       this.getOrderList()
-    }
+    },
+
   }
 </script>
 <style lang="scss">

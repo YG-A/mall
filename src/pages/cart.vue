@@ -197,7 +197,7 @@ export default {
         quantity++
       }else if(type === 'select'){
         // 选中状态取反
-        selected = !item.productSelected
+        selected = !item.productSelected  
       }else if(type === 'num'){
         if(typeof quantity === 'number'){
           if(quantity < 1){
